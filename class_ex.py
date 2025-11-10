@@ -31,8 +31,8 @@ cal1 = Calculator()
 # 클래스로부터 인스턴스를 생성하여 변수 cal2에 할당 / 할당이 되는 순간 cal2 내부의 result 값은 0으로 초기화됨
 cal2 = Calculator()
 
-print(f"{cal1.add(3)} \n{cal1.add(4)} \n{cal1.sub(2)} \n{int(cal1.div(2))} \n{int(cal1.mul(8))}")
+print(f"{cal1.add(3)} \n{cal1.add(4)} \n{cal1.sub(2)} \n{cal1.div(2)} \n{cal1.mul(8)}")
 print("--------------------------------------------------")
-print(f"{cal2.add(8)} \n{cal2.add(2)} \n{cal2.sub(1)} \n{int(cal2.mul(2))} \n{int(cal2.div(3))}")
+print(f"{cal2.add(8)} \n{cal2.add(2)} \n{cal2.sub(1)} \n{cal2.mul(2)} \n{cal2.div(3)}")
 
 
