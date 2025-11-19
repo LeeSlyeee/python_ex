@@ -91,6 +91,7 @@ def coffee_vending_machine(): # 커피 자판기 함수
         if continue_choice.lower() != 'y': # 계속하지 않을 시
             print("이용해주셔서 감사합니다!") # 종료 메시지 출력
             break # 루프 종료
-# coffee_vending_machine() # 커피 자판기 함수 호출
-
+        
+        
 coffee_vending_machine() # 커피 자판기 함수 호출
+
