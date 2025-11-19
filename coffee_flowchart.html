@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee Flowchart</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+<body>
+    <h2>커피 주문 플로우차트</h2>
+    <div class="mermaid">
+        graph TD
+        Start((시작)) --> SelectCoffee{커피 종류 선택}
+        
+        SelectCoffee -->|아메리카노| CheckAmericano[재료 확인: 원두, 물]
+        SelectCoffee -->|카페라떼| CheckLatte[재료 확인: 원두, 우유]
+        SelectCoffee -->|말차라떼| CheckMatcha[재료 확인: 녹차, 우유]
+        SelectCoffee -->|에스프레소| CheckEspresso[재료 확인: 원두]
+
+        CheckAmericano --> CheckIngredients{재료가 충분한가?}
+        CheckLatte --> CheckIngredients
+        CheckMatcha --> CheckIngredients
+        CheckEspresso --> CheckIngredients
+
+        CheckIngredients -- 아니오 --> SoldOut[품절 안내: 재료 부족]
+        SoldOut --> End((종료))
+
+        CheckIngredients -- 예 --> SelectTemp{온/냉 선택}
+
+        SelectTemp -- 냉음료 --> CheckIce{얼음 수량 확인}
+        CheckIce -- 부족 --> SoldOut
+        CheckIce -- 충분 --> UseIce[얼음 사용]
+        UseIce --> MakeCoffee[커피 제조: 재료 차감]
+
+        SelectTemp -- 온음료 --> MakeCoffee
+
+        MakeCoffee --> Serve[커피 제공]
+        Serve --> End
+    </div>
+</body>
+</html>

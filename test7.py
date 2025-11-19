@@ -182,13 +182,14 @@ class FoldingBicycle(Bicycle):
         print(f"자전거는 {self.state} 상태입니다.")
 
 folding_bicycle = FoldingBicycle(27, 'white', 'unfolding')
+folding_bicycle2 = FoldingBicycle(24, 'black', 'folding')
 
 
-folding_bicycle.fold()
-folding_bicycle.status()
+# folding_bicycle.fold()
+# folding_bicycle.status()
 
-folding_bicycle.unfold()
-folding_bicycle.status()
+# folding_bicycle.unfold()
+# folding_bicycle.status()
 
 
 from grade_manager import *
