@@ -2,7 +2,6 @@ import pandas as pd
 import korean
 import matplotlib.pyplot as plt
 import numpy as np
-
 korean.korean_setup()
 
 
