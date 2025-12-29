@@ -19,6 +19,7 @@ ssh_public.zip
 \java_script
 \.vscode
 \presentation
+\.ipynb_checkpoints
 
 
 *.pyc
