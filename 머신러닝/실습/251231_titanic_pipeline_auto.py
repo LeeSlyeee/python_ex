@@ -81,8 +81,7 @@ def main():
 
     # 학습 데이터와 테스트 데이터를 분리합니다. (테스트 비율 20%, 난수 시드 11)
     # y_titanic_df를 포함해야 학습 시 정답 데이터도 함께 나뉩니다.
-    X_train, X_test, y_train, y_test = train_test_split(X_titanic_df, y_titanic_df, \
-                                                        test_size=0.2, random_state=11)
+    X_train, X_test, y_train, y_test = train_test_split(X_titanic_df, y_titanic_df, test_size=0.2, random_state=11)
     print("\n### 데이터 전처리 및 분리 완료 ###")
 
     # 4. 모델 및 파라미터 정의
