@@ -100,19 +100,31 @@ print("\n" + "="*80)
 print("3. 주요 수치형 변수 분석")
 print("="*80)
 
-# 분석할 주요 수치형 변수 리스트
+# 분석할 주요 수치형 컬럼 리스트 정의
 numeric_cols = ['raisedhands', 'VisITedResources', 'AnnouncementsView', 'Discussion']
+# 시각화를 위한 한글 매핑 딕셔너리
+feature_kor_names = {
+    'raisedhands': '손을 들 횟수', 'VisITedResources': '과목 공지 확인 횟수',
+    'AnnouncementsView': '공지사항 확인 횟수', 'Discussion': '토론 참여 횟수',
+    'gender': '성별', 'NationalITy': '국적', 'PlaceofBirth': '태어난 국가',
+    'StageID': '학교 단계', 'GradeID': '성적 등급(ID)', 'SectionID': '반 이름',
+    'Topic': '과목', 'Semester': '학기', 'Relation': '보호자 관계',
+    'ParentAnsweringSurvey': '부모 설문 참여', 'ParentschoolSatisfaction': '부모 만족도',
+    'StudentAbsenceDays': '결석 횟수'
+}
 
-# 여러 개의 그래프를 한 번에 그리기 위해 subplot 생성 (2행 2열)
+# 2x2 그리드의 서브플롯(그래프 영역) 생성
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-axes = axes.flatten() # 2차원 배열을 1차원으로 펼쳐서(Flatten) 인덱싱하기 쉽게 함
+# 2차원 배열 형태인 axes를 1차원 배열로 평탄화 (반복문처리를 쉽게 하기 위해)
+axes = axes.flatten()
 
-# 각 수치형 변수에 대해 Class별 분포(Boxplot) 그리기
+# 각 수치형 변수에 대해 반복하며 상자 그림(Boxplot) 그리기
 for i, col in enumerate(numeric_cols):
-    # Boxplot: 데이터의 분포(중앙값, 사분위수, 이상치)를 한눈에 파악
+    # 성적 등급(Class)별로 수치 변수의 분포를 상자 그림으로 시각화
     sns.boxplot(data=df, x='Class', y=col, ax=axes[i], palette='Set2')
-    axes[i].set_title(f'{col} by Class')
-    axes[i].set_xlabel('성적 등급')
+    axes[i].set_title(f'성적 등급별 {feature_kor_names[col]} 분포')  # 각 서브플롯 제목 설정
+    axes[i].set_xlabel('성적 등급')       # x축 레이블 설정
+    axes[i].set_ylabel(feature_kor_names[col]) # y축 레이블 설정
 
 plt.tight_layout()
 # 분석 결과 그래프 저장
@@ -263,15 +275,19 @@ print("Confusion Matrix 저장: confusion_matrix.png")
 plt.figure(figsize=(10, 8))
 n_classes = len(target_le.classes_)
 
+# 성적 등급 한글 매핑 (H/L/M -> 우수/부진/보통)
+class_kor_names = {'H': '우수(H)', 'L': '부진(L)', 'M': '보통(M)'}
+
 for i in range(n_classes):
     # 각 클래스 i에 대한 FPR, TPR 계산
     fpr, tpr, _ = roc_curve(y_test, y_pred_proba[:, i], pos_label=i)
-    plt.plot(fpr, tpr, label=f'ROC curve of class {target_le.classes_[i]} (AUC = {roc_auc_score(y_test == i, y_pred_proba[:, i]):.2f})')
+    class_name = target_le.classes_[i]
+    plt.plot(fpr, tpr, label=f'{class_kor_names[class_name]} 등급 (AUC = {roc_auc_score(y_test == i, y_pred_proba[:, i]):.2f})')
 
-plt.plot([0, 1], [0, 1], 'k--', label='Random Guess')
-plt.xlabel('False Positive Rate (FPR)')
-plt.ylabel('True Positive Rate (TPR)')
-plt.title('Multi-class ROC Curve (One-vs-Rest)')
+plt.plot([0, 1], [0, 1], 'k--', label='무작위 예측')
+plt.xlabel('허위 양성 비율 (FPR)')
+plt.ylabel('진 진짜 양성 비율 (TPR)')
+plt.title('다중 클래스 ROC 곡선 (One-vs-Rest)')
 plt.legend(loc='lower right')
 plt.grid(alpha=0.3)
 plt.savefig(os.path.join(path, 'roc_curve.png'))
@@ -279,21 +295,25 @@ print("ROC Curve 그래프 저장: roc_curve.png")
 
 # 3. Feature Importance (변수 중요도)
 # 모델이 성적을 예측할 때 어떤 변수가 가장 중요한 역할을 했는지 확인합니다.
+# 변수 이름을 한글로 변환하여 저장
+korean_features = [feature_kor_names.get(col, col) for col in X.columns]
+
 feature_importance = pd.DataFrame({
-    'feature': X.columns,
+    'feature': korean_features,
     'importance': xgb_model.feature_importances_
-}).sort_values('importance', ascending=False) # 중요도가 높은 순으로 정렬
+}).sort_values('importance', ascending=False) # 중요도 내림차순 정렬
 
 print(f"\n주요 Feature Importance (Top 10):")
 print(feature_importance.head(10))
 
-# 가로 막대 그래프로 중요도 시각화
+# 중요도 상위 10개 변수에 대해 가로 막대 그래프 그리기
 plt.figure(figsize=(10, 8))
 top_features = feature_importance.head(10)
+# barh: 가로 막대 그래프
 plt.barh(range(len(top_features)), top_features['importance'].values)
 plt.yticks(range(len(top_features)), top_features['feature'].values)
-plt.xlabel('Importance (중요도)')
-plt.title('Top 10 Feature Importance (XGBoost)')
+plt.xlabel('중요도 (Importance)')
+plt.title('모델 예측 변수 중요도 Top 10 (XGBoost)')
 plt.gca().invert_yaxis() # 중요도가 높은 것이 위로 오도록 Y축 반전
 plt.tight_layout()
 plt.savefig(os.path.join(path, 'feature_importance.png'))

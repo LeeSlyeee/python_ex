@@ -147,18 +147,18 @@
 
 ### 6.1 주요 변수 (Top 10)
 
-| 순위 | 변수명                   | 중요도 | 설명                   |
-| ---- | ------------------------ | ------ | ---------------------- |
-| 1    | **StudentAbsenceDays**   | 0.398  | 결석 횟수 (가장 중요!) |
-| 2    | Relation                 | 0.091  | 보호자 관계            |
-| 3    | VisITedResources         | 0.070  | 학습 자료 확인 횟수    |
-| 4    | raisedhands              | 0.061  | 수업 중 질문 횟수      |
-| 5    | gender                   | 0.049  | 성별                   |
-| 6    | ParentschoolSatisfaction | 0.043  | 부모 만족도            |
-| 7    | AnnouncementsView        | 0.039  | 공지 확인 횟수         |
-| 8    | ParentAnsweringSurvey    | 0.034  | 부모 설문 참여         |
-| 9    | Discussion               | 0.034  | 토론 참여도            |
-| 10   | NationalITy              | 0.031  | 국적                   |
+| 순위 | 변수명              | 중요도 | 설명                     |
+| ---- | ------------------- | ------ | ------------------------ |
+| 1    | **결석 횟수**       | 0.398  | StudentAbsenceDays       |
+| 2    | 보호자 관계         | 0.091  | Relation                 |
+| 3    | 과목 공지 확인 횟수 | 0.070  | VisITedResources         |
+| 4    | 손들기 횟수         | 0.061  | raisedhands              |
+| 5    | 성별                | 0.049  | gender                   |
+| 6    | 부모 만족도         | 0.043  | ParentschoolSatisfaction |
+| 7    | 공지사항 확인 횟수  | 0.039  | AnnouncementsView        |
+| 8    | 부모 설문 참여      | 0.034  | ParentAnsweringSurvey    |
+| 9    | 토론 참여 횟수      | 0.034  | Discussion               |
+| 10   | 국적                | 0.031  | NationalITy              |
 
 ### 6.2 핵심 인사이트
 
