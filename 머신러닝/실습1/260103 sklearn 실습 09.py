@@ -24,7 +24,6 @@ import matplotlib.pyplot as plt # 기본 시각화
 import seaborn as sns           # 통계적 데이터 시각화
 import requests                 # 웹 이미지 다운로드 등 HTTP 요청
 from io import BytesIO          # 바이트 스트림 처리를 위함 (이미지 로드용)
-from PIL import Image           # 이미지 처리를 위한 PIL 라이브러리
 
 
 
