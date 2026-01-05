@@ -104,12 +104,21 @@ print("="*80)
 numeric_cols = ['raisedhands', 'VisITedResources', 'AnnouncementsView', 'Discussion']
 # 시각화를 위한 한글 매핑 딕셔너리
 feature_kor_names = {
-    'raisedhands': '손을 들 횟수', 'VisITedResources': '과목 공지 확인 횟수',
-    'AnnouncementsView': '공지사항 확인 횟수', 'Discussion': '토론 참여 횟수',
-    'gender': '성별', 'NationalITy': '국적', 'PlaceofBirth': '태어난 국가',
-    'StageID': '학교 단계', 'GradeID': '성적 등급(ID)', 'SectionID': '반 이름',
-    'Topic': '과목', 'Semester': '학기', 'Relation': '보호자 관계',
-    'ParentAnsweringSurvey': '부모 설문 참여', 'ParentschoolSatisfaction': '부모 만족도',
+    'raisedhands': '손을 들 횟수', 
+    'VisITedResources': '과목 공지 확인 횟수',
+    'AnnouncementsView': '공지사항 확인 횟수', 
+    'Discussion': '토론 참여 횟수',
+    'gender': '성별', 
+    'NationalITy': '국적', 
+    'PlaceofBirth': '태어난 국가',
+    'StageID': '학교 단계', 
+    'GradeID': '성적 등급(ID)', 
+    'SectionID': '반 이름',
+    'Topic': '과목', 
+    'Semester': '학기', 
+    'Relation': '보호자 관계',
+    'ParentAnsweringSurvey': '부모 설문 참여', 
+    'ParentschoolSatisfaction': '부모 만족도',
     'StudentAbsenceDays': '결석 횟수'
 }
 
