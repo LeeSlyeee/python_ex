@@ -415,7 +415,7 @@ print(mse_eval('Weighted Blending', final_prediction, y_test))
 
 # 이미지 로드 (스택킹 관련 이미지로 추정되나 URL 불명확, 예외처리 없이 원본 유지)
 try:
-    response = requests.get('b04c27c5-7e3f-428a-9aa6-bb3ebcd3584c.png') # 아마 잘못된 URL일 가능성 높음
+    response = requests.get('https://static.packt-cdn.com/products/9781789617740/graphics/b04c27c5-7e3f-428a-9aa6-bb3ebcd3584c.png') # 아마 잘못된 URL일 가능성 높음
     if response.status_code == 200:
         img = Image.open(BytesIO(response.content))
         plt.imshow(img)
