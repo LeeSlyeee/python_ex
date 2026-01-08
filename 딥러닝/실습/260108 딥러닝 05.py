@@ -162,8 +162,8 @@ y_loss=hist_df['loss']      # 학습셋(Train) 오차: 파란색 점
 
 # 그래프 그리기
 x_len = np.arange(len(y_loss)) # X축: 에포크 수
-plt.plot(x_len, y_vloss, "o", c="red", markersize=2, label='Testset_loss')
-plt.plot(x_len, y_loss, "o", c="blue", markersize=2, label='Trainset_loss')
+plt.plot(x_len, y_vloss, "o", c="red", markersize=2, label='Val_loss')
+plt.plot(x_len, y_loss, "o", c="blue", markersize=2, label='Train_loss')
 
 plt.legend(loc='upper right') # 범례 위치 설정
 plt.xlabel('epoch')           # X축 라벨
