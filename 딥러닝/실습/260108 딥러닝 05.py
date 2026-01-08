@@ -46,7 +46,8 @@ y = df.iloc[:,12]
 # 학습 데이터(80%)와 테스트 데이터(20%)로 분리
 # test_size=0.2: 전체의 20%를 테스트 셋으로 할당
 # shuffle=True: 데이터를 무작위로 섞어서 분할
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=True)
+# stratify=y: 클래스 분포를 유지하여 데이터 분할
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, shuffle=True)
 
 
 # =============================================================================
