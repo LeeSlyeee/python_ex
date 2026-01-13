@@ -20,6 +20,6 @@ ssh_public.zip
 \.vscode
 \presentation
 \.ipynb_checkpoints
-
+\딥러닝\과제\Image_data
 
 *.pyc
