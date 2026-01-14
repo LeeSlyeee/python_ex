@@ -21,6 +21,6 @@ ssh_public.zip
 \presentation
 \.ipynb_checkpoints
 \딥러닝\과제\Image_data
-\딥러닝\실습\dataset
+\딥러닝\실습\이미지_분류\dataset
 
 *.pyc
