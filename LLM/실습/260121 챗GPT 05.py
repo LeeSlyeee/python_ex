@@ -34,6 +34,8 @@ from langchain_classic import LLMChain
 # (참고: create_extraction_chain은 deprecated 되었으며 with_structured_output 사용 권장됨)
 from langchain_classic.chains import create_extraction_chain
 
+from langchain_classic.evaluation import load_evaluator
+
 
 # .env 파일 로드 (환경 변수 설정)
 # 일반적으로 API Key(.env에 저장됨)를 로드하기 위해 사용
@@ -287,3 +289,45 @@ people = chain.invoke(text)
 # 결과 출력
 print(json.dumps(people, indent=2))
 # (참고: 실행 시 deprecated 경고가 발생할 수 있음)
+
+
+
+# =============================================================================
+# [10] 결과 평가 (Evaluation) - QA Evaluator
+# =============================================================================
+# LLM이 생성한 답변의 품질을 자동으로 평가하는 기능입니다.
+# 정답(Reference)이 있는 경우, 모델의 답변(Prediction)이 얼마나 정확한지 판단할 때 사용합니다.
+
+chat = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
+
+# 1. 평가자(Evaluator) 로드
+# "qa": 질의응답(Question Answering) 유형의 평가를 수행하는 evaluator를 로드합니다.
+# eval_llm: 평가를 수행할 LLM 모델. (GPT-4와 같은 고성능 모델을 사용하는 것이 일반적이지만, 여기서는 gpt-4.1-mini 사용)
+evaluator = load_evaluator("qa", eval_llm=chat)
+
+# 2. 평가 실행 (evaluate_strings)
+# input: 사용자의 원래 질문 또는 문제 상황
+# prediction: 평가 대상 모델이 내놓은 답변 (AI의 현재 출력)
+# reference: 정답 또는 모범 답안 (Ground Truth)
+result = evaluator.evaluate_strings(
+    input="""
+        나는 시장에 가서 사과 10개를 샀어.
+        사과 2개를 이웃에게 주고, 2개를 수리공에게 주었어.
+        그리고 사과 5개를 더 사서 1개는 내가 먹었어.
+        나는 몇 개의 사과를 가지고 있었니?
+    """,
+    prediction="""
+        먼저 사과 10개로 시작했어.
+        이웃에게 2개, 수리공에게 2개를 나누어 주었으므로 사과가 6개가 남았어.
+        그런 다음 사과 5개를 더 사서 이제 사과가 11개가 되었어.
+        마지막으로 사과 1개를 먹었으므로 사과 10개가 남게 돼.
+    """,
+    reference="10개",
+)
+
+# 3. 평가 결과 출력
+# 결과는 딕셔너리 형태로 반환되며, 보통 다음과 같은 키를 포함합니다.
+# - reasoning: 평가 모델이 왜 맞거나 틀렸다고 판단했는지에 대한 추론 과정
+# - value: 'CORRECT' 또는 'INCORRECT' (정답 여부)
+# - score: 점수 (1 또는 0)
+print(result)
