@@ -1,0 +1,4 @@
+sentence="""
+One limitation of LLMs is their lack of contextual information (e.g., access to some specific documents or emails). You can combat this by giving LLMs access to the specific external data.
+For this, you first need to load the external data with a document loader. LangChain provides a variety of loaders for different types of documents ranging from PDFs and emails to websites and YouTube videos.
+"""
