@@ -1,0 +1,10 @@
+# 오디오 파일 다운로드
+!wget https://upload.wikimedia.org/wikipedia/commons/7/75/Winston_Churchill_-_Be_Ye_Men_of_Valour.ogg -O src/whisper/audio/Winston_Church.ogg
+
+
+
+# 폴더 생성
+!mkdir -p src/whisper/audio
+
+# 오디오 파일 다운로드
+!wget https://raw.githubusercontent.com/LDJWJ/OpenAIGPTForPythonDevelopersFiles/main/audio/cypher.mp3 -O src/whisper/audio/cypher.mp3
